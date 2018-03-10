@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkjoy.swms.dao.mapper.SwmsScholarshipSettingMapper">
+  <resultMap id="BaseResultMap" type="com.thinkjoy.swms.dao.entity.SwmsScholarshipSetting">
+    <id column="scholarshipsetting_uid" jdbcType="VARCHAR" property="scholarshipsettingUid" />
+    <result column="scholarship_name" jdbcType="VARCHAR" property="scholarshipName" />
+    <result column="scholarship_level" jdbcType="VARCHAR" property="scholarshipLevel" />
+    <result column="number_limit" jdbcType="INTEGER" property="numberLimit" />
+    <result column="grant_way" jdbcType="VARCHAR" property="grantWay" />
+    <result column="grant_object" jdbcType="VARCHAR" property="grantObject" />
+    <result column="funds_source" jdbcType="VARCHAR" property="fundsSource" />
+    <result column="money" jdbcType="INTEGER" property="money" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="is_open" jdbcType="VARCHAR" property="isOpen" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="ctime" jdbcType="BIGINT" property="ctime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="school_code" jdbcType="VARCHAR" property="schoolCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    scholarshipsetting_uid, scholarship_name, scholarship_level, number_limit, grant_way, 
+    grant_object, funds_source, money, start_date, end_date, is_open, creator, ctime, 
+    description, status, school_code
+  </sql>
+  <select id="selectByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsScholarshipSettingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from swms_scholarship_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from swms_scholarship_setting
+    where scholarshipsetting_uid = #{scholarshipsettingUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from swms_scholarship_setting
+    where scholarshipsetting_uid = #{scholarshipsettingUid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsScholarshipSettingExample">
+    delete from swms_scholarship_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.thinkjoy.swms.dao.entity.SwmsScholarshipSetting">
+    insert into swms_scholarship_setting (scholarshipsetting_uid, scholarship_name, 
+      scholarship_level, number_limit, grant_way, 
+      grant_object, funds_source, money, 
+      start_date, end_date, is_open, 
+      creator, ctime, description, 
+      status, school_code)
+    values (#{scholarshipsettingUid,jdbcType=VARCHAR}, #{scholarshipName,jdbcType=VARCHAR}, 
+      #{scholarshipLevel,jdbcType=VARCHAR}, #{numberLimit,jdbcType=INTEGER}, #{grantWay,jdbcType=VARCHAR}, 
+      #{grantObject,jdbcType=VARCHAR}, #{fundsSource,jdbcType=VARCHAR}, #{money,jdbcType=INTEGER}, 
+      #{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, #{isOpen,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{ctime,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{schoolCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.thinkjoy.swms.dao.entity.SwmsScholarshipSetting">
+    insert into swms_scholarship_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="scholarshipsettingUid != null">
+        scholarshipsetting_uid,
+      </if>
+      <if test="scholarshipName != null">
+        scholarship_name,
+      </if>
+      <if test="scholarshipLevel != null">
+        scholarship_level,
+      </if>
+      <if test="numberLimit != null">
+        number_limit,
+      </if>
+      <if test="grantWay != null">
+        grant_way,
+      </if>
+      <if test="grantObject != null">
+        grant_object,
+      </if>
+      <if test="fundsSource != null">
+        funds_source,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="isOpen != null">
+        is_open,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="schoolCode != null">
+        school_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="scholarshipsettingUid != null">
+        #{scholarshipsettingUid,jdbcType=VARCHAR},
+      </if>
+      <if test="scholarshipName != null">
+        #{scholarshipName,jdbcType=VARCHAR},
+      </if>
+      <if test="scholarshipLevel != null">
+        #{scholarshipLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="numberLimit != null">
+        #{numberLimit,jdbcType=INTEGER},
+      </if>
+      <if test="grantWay != null">
+        #{grantWay,jdbcType=VARCHAR},
+      </if>
+      <if test="grantObject != null">
+        #{grantObject,jdbcType=VARCHAR},
+      </if>
+      <if test="fundsSource != null">
+        #{fundsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="isOpen != null">
+        #{isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCode != null">
+        #{schoolCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsScholarshipSettingExample" resultType="java.lang.Long">
+    select count(*) from swms_scholarship_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update swms_scholarship_setting
+    <set>
+      <if test="record.scholarshipsettingUid != null">
+        scholarshipsetting_uid = #{record.scholarshipsettingUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scholarshipName != null">
+        scholarship_name = #{record.scholarshipName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scholarshipLevel != null">
+        scholarship_level = #{record.scholarshipLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberLimit != null">
+        number_limit = #{record.numberLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.grantWay != null">
+        grant_way = #{record.grantWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grantObject != null">
+        grant_object = #{record.grantObject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fundsSource != null">
+        funds_source = #{record.fundsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=INTEGER},
+      </if>
+      <if test="record.startDate != null">
+        start_date = #{record.startDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.isOpen != null">
+        is_open = #{record.isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=BIGINT},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolCode != null">
+        school_code = #{record.schoolCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update swms_scholarship_setting
+    set scholarshipsetting_uid = #{record.scholarshipsettingUid,jdbcType=VARCHAR},
+      scholarship_name = #{record.scholarshipName,jdbcType=VARCHAR},
+      scholarship_level = #{record.scholarshipLevel,jdbcType=VARCHAR},
+      number_limit = #{record.numberLimit,jdbcType=INTEGER},
+      grant_way = #{record.grantWay,jdbcType=VARCHAR},
+      grant_object = #{record.grantObject,jdbcType=VARCHAR},
+      funds_source = #{record.fundsSource,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=INTEGER},
+      start_date = #{record.startDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE},
+      is_open = #{record.isOpen,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      ctime = #{record.ctime,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      school_code = #{record.schoolCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thinkjoy.swms.dao.entity.SwmsScholarshipSetting">
+    update swms_scholarship_setting
+    <set>
+      <if test="scholarshipName != null">
+        scholarship_name = #{scholarshipName,jdbcType=VARCHAR},
+      </if>
+      <if test="scholarshipLevel != null">
+        scholarship_level = #{scholarshipLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="numberLimit != null">
+        number_limit = #{numberLimit,jdbcType=INTEGER},
+      </if>
+      <if test="grantWay != null">
+        grant_way = #{grantWay,jdbcType=VARCHAR},
+      </if>
+      <if test="grantObject != null">
+        grant_object = #{grantObject,jdbcType=VARCHAR},
+      </if>
+      <if test="fundsSource != null">
+        funds_source = #{fundsSource,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="isOpen != null">
+        is_open = #{isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCode != null">
+        school_code = #{schoolCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where scholarshipsetting_uid = #{scholarshipsettingUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thinkjoy.swms.dao.entity.SwmsScholarshipSetting">
+    update swms_scholarship_setting
+    set scholarship_name = #{scholarshipName,jdbcType=VARCHAR},
+      scholarship_level = #{scholarshipLevel,jdbcType=VARCHAR},
+      number_limit = #{numberLimit,jdbcType=INTEGER},
+      grant_way = #{grantWay,jdbcType=VARCHAR},
+      grant_object = #{grantObject,jdbcType=VARCHAR},
+      funds_source = #{fundsSource,jdbcType=VARCHAR},
+      money = #{money,jdbcType=INTEGER},
+      start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      is_open = #{isOpen,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      school_code = #{schoolCode,jdbcType=VARCHAR}
+    where scholarshipsetting_uid = #{scholarshipsettingUid,jdbcType=VARCHAR}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

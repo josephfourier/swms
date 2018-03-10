@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkjoy.swms.dao.mapper.SwmsStufileMapper">
+  <resultMap id="BaseResultMap" type="com.thinkjoy.swms.dao.entity.SwmsStufile">
+    <id column="stufile_uid" jdbcType="VARCHAR" property="stufileUid" />
+    <result column="student_id" jdbcType="INTEGER" property="studentId" />
+    <result column="stufile_no" jdbcType="VARCHAR" property="stufileNo" />
+    <result column="recipient" jdbcType="VARCHAR" property="recipient" />
+    <result column="stufile_date" jdbcType="DATE" property="stufileDate" />
+    <result column="stufile_description" jdbcType="VARCHAR" property="stufileDescription" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="ctime" jdbcType="BIGINT" property="ctime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="school_code" jdbcType="VARCHAR" property="schoolCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    stufile_uid, student_id, stufile_no, recipient, stufile_date, stufile_description, 
+    creator, ctime, description, status, school_code
+  </sql>
+  <select id="selectByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsStufileExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from swms_stufile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from swms_stufile
+    where stufile_uid = #{stufileUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from swms_stufile
+    where stufile_uid = #{stufileUid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsStufileExample">
+    delete from swms_stufile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.thinkjoy.swms.dao.entity.SwmsStufile">
+    insert into swms_stufile (stufile_uid, student_id, stufile_no, 
+      recipient, stufile_date, stufile_description, 
+      creator, ctime, description, 
+      status, school_code)
+    values (#{stufileUid,jdbcType=VARCHAR}, #{studentId,jdbcType=INTEGER}, #{stufileNo,jdbcType=VARCHAR}, 
+      #{recipient,jdbcType=VARCHAR}, #{stufileDate,jdbcType=DATE}, #{stufileDescription,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{ctime,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{schoolCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.thinkjoy.swms.dao.entity.SwmsStufile">
+    insert into swms_stufile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stufileUid != null">
+        stufile_uid,
+      </if>
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="stufileNo != null">
+        stufile_no,
+      </if>
+      <if test="recipient != null">
+        recipient,
+      </if>
+      <if test="stufileDate != null">
+        stufile_date,
+      </if>
+      <if test="stufileDescription != null">
+        stufile_description,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="schoolCode != null">
+        school_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stufileUid != null">
+        #{stufileUid,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null">
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="stufileNo != null">
+        #{stufileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="recipient != null">
+        #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="stufileDate != null">
+        #{stufileDate,jdbcType=DATE},
+      </if>
+      <if test="stufileDescription != null">
+        #{stufileDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCode != null">
+        #{schoolCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsStufileExample" resultType="java.lang.Long">
+    select count(*) from swms_stufile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update swms_stufile
+    <set>
+      <if test="record.stufileUid != null">
+        stufile_uid = #{record.stufileUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentId != null">
+        student_id = #{record.studentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stufileNo != null">
+        stufile_no = #{record.stufileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recipient != null">
+        recipient = #{record.recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stufileDate != null">
+        stufile_date = #{record.stufileDate,jdbcType=DATE},
+      </if>
+      <if test="record.stufileDescription != null">
+        stufile_description = #{record.stufileDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=BIGINT},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolCode != null">
+        school_code = #{record.schoolCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update swms_stufile
+    set stufile_uid = #{record.stufileUid,jdbcType=VARCHAR},
+      student_id = #{record.studentId,jdbcType=INTEGER},
+      stufile_no = #{record.stufileNo,jdbcType=VARCHAR},
+      recipient = #{record.recipient,jdbcType=VARCHAR},
+      stufile_date = #{record.stufileDate,jdbcType=DATE},
+      stufile_description = #{record.stufileDescription,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      ctime = #{record.ctime,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      school_code = #{record.schoolCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thinkjoy.swms.dao.entity.SwmsStufile">
+    update swms_stufile
+    <set>
+      <if test="studentId != null">
+        student_id = #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="stufileNo != null">
+        stufile_no = #{stufileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="recipient != null">
+        recipient = #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="stufileDate != null">
+        stufile_date = #{stufileDate,jdbcType=DATE},
+      </if>
+      <if test="stufileDescription != null">
+        stufile_description = #{stufileDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCode != null">
+        school_code = #{schoolCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stufile_uid = #{stufileUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thinkjoy.swms.dao.entity.SwmsStufile">
+    update swms_stufile
+    set student_id = #{studentId,jdbcType=INTEGER},
+      stufile_no = #{stufileNo,jdbcType=VARCHAR},
+      recipient = #{recipient,jdbcType=VARCHAR},
+      stufile_date = #{stufileDate,jdbcType=DATE},
+      stufile_description = #{stufileDescription,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      school_code = #{schoolCode,jdbcType=VARCHAR}
+    where stufile_uid = #{stufileUid,jdbcType=VARCHAR}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

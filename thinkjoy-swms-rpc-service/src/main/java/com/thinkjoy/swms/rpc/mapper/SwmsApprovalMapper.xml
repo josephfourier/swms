@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkjoy.swms.dao.mapper.SwmsApprovalMapper">
+  <resultMap id="BaseResultMap" type="com.thinkjoy.swms.dao.entity.SwmsApproval">
+    <id column="approval_uid" jdbcType="VARCHAR" property="approvalUid" />
+    <result column="template_uid" jdbcType="VARCHAR" property="templateUid" />
+    <result column="data_uid" jdbcType="VARCHAR" property="dataUid" />
+    <result column="approval_step" jdbcType="INTEGER" property="approvalStep" />
+    <result column="approval_type" jdbcType="VARCHAR" property="approvalType" />
+    <result column="post_id" jdbcType="INTEGER" property="postId" />
+    <result column="post_name" jdbcType="VARCHAR" property="postName" />
+    <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="approval_status" jdbcType="VARCHAR" property="approvalStatus" />
+    <result column="approval_opinion" jdbcType="VARCHAR" property="approvalOpinion" />
+    <result column="approval_time" jdbcType="TIMESTAMP" property="approvalTime" />
+    <result column="approval_uri" jdbcType="VARCHAR" property="approvalUri" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="ctime" jdbcType="BIGINT" property="ctime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="school_code" jdbcType="VARCHAR" property="schoolCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    approval_uid, template_uid, data_uid, approval_step, approval_type, post_id, post_name, 
+    teacher_id, teacher_name, approval_status, approval_opinion, approval_time, approval_uri, 
+    creator, ctime, description, status, school_code
+  </sql>
+  <select id="selectByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsApprovalExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from swms_approval
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from swms_approval
+    where approval_uid = #{approvalUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from swms_approval
+    where approval_uid = #{approvalUid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsApprovalExample">
+    delete from swms_approval
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.thinkjoy.swms.dao.entity.SwmsApproval">
+    insert into swms_approval (approval_uid, template_uid, data_uid, 
+      approval_step, approval_type, post_id, 
+      post_name, teacher_id, teacher_name, 
+      approval_status, approval_opinion, approval_time, 
+      approval_uri, creator, ctime, 
+      description, status, school_code
+      )
+    values (#{approvalUid,jdbcType=VARCHAR}, #{templateUid,jdbcType=VARCHAR}, #{dataUid,jdbcType=VARCHAR}, 
+      #{approvalStep,jdbcType=INTEGER}, #{approvalType,jdbcType=VARCHAR}, #{postId,jdbcType=INTEGER}, 
+      #{postName,jdbcType=VARCHAR}, #{teacherId,jdbcType=INTEGER}, #{teacherName,jdbcType=VARCHAR}, 
+      #{approvalStatus,jdbcType=VARCHAR}, #{approvalOpinion,jdbcType=VARCHAR}, #{approvalTime,jdbcType=TIMESTAMP}, 
+      #{approvalUri,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{ctime,jdbcType=BIGINT}, 
+      #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{schoolCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.thinkjoy.swms.dao.entity.SwmsApproval">
+    insert into swms_approval
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="approvalUid != null">
+        approval_uid,
+      </if>
+      <if test="templateUid != null">
+        template_uid,
+      </if>
+      <if test="dataUid != null">
+        data_uid,
+      </if>
+      <if test="approvalStep != null">
+        approval_step,
+      </if>
+      <if test="approvalType != null">
+        approval_type,
+      </if>
+      <if test="postId != null">
+        post_id,
+      </if>
+      <if test="postName != null">
+        post_name,
+      </if>
+      <if test="teacherId != null">
+        teacher_id,
+      </if>
+      <if test="teacherName != null">
+        teacher_name,
+      </if>
+      <if test="approvalStatus != null">
+        approval_status,
+      </if>
+      <if test="approvalOpinion != null">
+        approval_opinion,
+      </if>
+      <if test="approvalTime != null">
+        approval_time,
+      </if>
+      <if test="approvalUri != null">
+        approval_uri,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="schoolCode != null">
+        school_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="approvalUid != null">
+        #{approvalUid,jdbcType=VARCHAR},
+      </if>
+      <if test="templateUid != null">
+        #{templateUid,jdbcType=VARCHAR},
+      </if>
+      <if test="dataUid != null">
+        #{dataUid,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalStep != null">
+        #{approvalStep,jdbcType=INTEGER},
+      </if>
+      <if test="approvalType != null">
+        #{approvalType,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="postName != null">
+        #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null">
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherName != null">
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalStatus != null">
+        #{approvalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalOpinion != null">
+        #{approvalOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalTime != null">
+        #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalUri != null">
+        #{approvalUri,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCode != null">
+        #{schoolCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsApprovalExample" resultType="java.lang.Long">
+    select count(*) from swms_approval
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update swms_approval
+    <set>
+      <if test="record.approvalUid != null">
+        approval_uid = #{record.approvalUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateUid != null">
+        template_uid = #{record.templateUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataUid != null">
+        data_uid = #{record.dataUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalStep != null">
+        approval_step = #{record.approvalStep,jdbcType=INTEGER},
+      </if>
+      <if test="record.approvalType != null">
+        approval_type = #{record.approvalType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postId != null">
+        post_id = #{record.postId,jdbcType=INTEGER},
+      </if>
+      <if test="record.postName != null">
+        post_name = #{record.postName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherId != null">
+        teacher_id = #{record.teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="record.teacherName != null">
+        teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalStatus != null">
+        approval_status = #{record.approvalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalOpinion != null">
+        approval_opinion = #{record.approvalOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvalTime != null">
+        approval_time = #{record.approvalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approvalUri != null">
+        approval_uri = #{record.approvalUri,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=BIGINT},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolCode != null">
+        school_code = #{record.schoolCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update swms_approval
+    set approval_uid = #{record.approvalUid,jdbcType=VARCHAR},
+      template_uid = #{record.templateUid,jdbcType=VARCHAR},
+      data_uid = #{record.dataUid,jdbcType=VARCHAR},
+      approval_step = #{record.approvalStep,jdbcType=INTEGER},
+      approval_type = #{record.approvalType,jdbcType=VARCHAR},
+      post_id = #{record.postId,jdbcType=INTEGER},
+      post_name = #{record.postName,jdbcType=VARCHAR},
+      teacher_id = #{record.teacherId,jdbcType=INTEGER},
+      teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+      approval_status = #{record.approvalStatus,jdbcType=VARCHAR},
+      approval_opinion = #{record.approvalOpinion,jdbcType=VARCHAR},
+      approval_time = #{record.approvalTime,jdbcType=TIMESTAMP},
+      approval_uri = #{record.approvalUri,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      ctime = #{record.ctime,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      school_code = #{record.schoolCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thinkjoy.swms.dao.entity.SwmsApproval">
+    update swms_approval
+    <set>
+      <if test="templateUid != null">
+        template_uid = #{templateUid,jdbcType=VARCHAR},
+      </if>
+      <if test="dataUid != null">
+        data_uid = #{dataUid,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalStep != null">
+        approval_step = #{approvalStep,jdbcType=INTEGER},
+      </if>
+      <if test="approvalType != null">
+        approval_type = #{approvalType,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="postName != null">
+        post_name = #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherId != null">
+        teacher_id = #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherName != null">
+        teacher_name = #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalStatus != null">
+        approval_status = #{approvalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalOpinion != null">
+        approval_opinion = #{approvalOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalTime != null">
+        approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalUri != null">
+        approval_uri = #{approvalUri,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCode != null">
+        school_code = #{schoolCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where approval_uid = #{approvalUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thinkjoy.swms.dao.entity.SwmsApproval">
+    update swms_approval
+    set template_uid = #{templateUid,jdbcType=VARCHAR},
+      data_uid = #{dataUid,jdbcType=VARCHAR},
+      approval_step = #{approvalStep,jdbcType=INTEGER},
+      approval_type = #{approvalType,jdbcType=VARCHAR},
+      post_id = #{postId,jdbcType=INTEGER},
+      post_name = #{postName,jdbcType=VARCHAR},
+      teacher_id = #{teacherId,jdbcType=INTEGER},
+      teacher_name = #{teacherName,jdbcType=VARCHAR},
+      approval_status = #{approvalStatus,jdbcType=VARCHAR},
+      approval_opinion = #{approvalOpinion,jdbcType=VARCHAR},
+      approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      approval_uri = #{approvalUri,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      school_code = #{schoolCode,jdbcType=VARCHAR}
+    where approval_uid = #{approvalUid,jdbcType=VARCHAR}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

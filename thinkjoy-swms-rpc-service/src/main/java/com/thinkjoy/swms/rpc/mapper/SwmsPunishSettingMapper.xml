@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkjoy.swms.dao.mapper.SwmsPunishSettingMapper">
+  <resultMap id="BaseResultMap" type="com.thinkjoy.swms.dao.entity.SwmsPunishSetting">
+    <id column="punishsetting_uid" jdbcType="VARCHAR" property="punishsettingUid" />
+    <result column="punish_name" jdbcType="VARCHAR" property="punishName" />
+    <result column="punisht_description" jdbcType="VARCHAR" property="punishtDescription" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="ctime" jdbcType="BIGINT" property="ctime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="school_code" jdbcType="VARCHAR" property="schoolCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    punishsetting_uid, punish_name, punisht_description, creator, ctime, description, 
+    status, school_code
+  </sql>
+  <select id="selectByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsPunishSettingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from swms_punish_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from swms_punish_setting
+    where punishsetting_uid = #{punishsettingUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from swms_punish_setting
+    where punishsetting_uid = #{punishsettingUid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsPunishSettingExample">
+    delete from swms_punish_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.thinkjoy.swms.dao.entity.SwmsPunishSetting">
+    insert into swms_punish_setting (punishsetting_uid, punish_name, punisht_description, 
+      creator, ctime, description, 
+      status, school_code)
+    values (#{punishsettingUid,jdbcType=VARCHAR}, #{punishName,jdbcType=VARCHAR}, #{punishtDescription,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{ctime,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{schoolCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.thinkjoy.swms.dao.entity.SwmsPunishSetting">
+    insert into swms_punish_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="punishsettingUid != null">
+        punishsetting_uid,
+      </if>
+      <if test="punishName != null">
+        punish_name,
+      </if>
+      <if test="punishtDescription != null">
+        punisht_description,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="schoolCode != null">
+        school_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="punishsettingUid != null">
+        #{punishsettingUid,jdbcType=VARCHAR},
+      </if>
+      <if test="punishName != null">
+        #{punishName,jdbcType=VARCHAR},
+      </if>
+      <if test="punishtDescription != null">
+        #{punishtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCode != null">
+        #{schoolCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsPunishSettingExample" resultType="java.lang.Long">
+    select count(*) from swms_punish_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update swms_punish_setting
+    <set>
+      <if test="record.punishsettingUid != null">
+        punishsetting_uid = #{record.punishsettingUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.punishName != null">
+        punish_name = #{record.punishName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.punishtDescription != null">
+        punisht_description = #{record.punishtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=BIGINT},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolCode != null">
+        school_code = #{record.schoolCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update swms_punish_setting
+    set punishsetting_uid = #{record.punishsettingUid,jdbcType=VARCHAR},
+      punish_name = #{record.punishName,jdbcType=VARCHAR},
+      punisht_description = #{record.punishtDescription,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      ctime = #{record.ctime,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      school_code = #{record.schoolCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thinkjoy.swms.dao.entity.SwmsPunishSetting">
+    update swms_punish_setting
+    <set>
+      <if test="punishName != null">
+        punish_name = #{punishName,jdbcType=VARCHAR},
+      </if>
+      <if test="punishtDescription != null">
+        punisht_description = #{punishtDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCode != null">
+        school_code = #{schoolCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where punishsetting_uid = #{punishsettingUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thinkjoy.swms.dao.entity.SwmsPunishSetting">
+    update swms_punish_setting
+    set punish_name = #{punishName,jdbcType=VARCHAR},
+      punisht_description = #{punishtDescription,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      school_code = #{schoolCode,jdbcType=VARCHAR}
+    where punishsetting_uid = #{punishsettingUid,jdbcType=VARCHAR}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

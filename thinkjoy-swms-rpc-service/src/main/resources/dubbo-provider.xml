@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+
+    <dubbo:application name="thinkjoy-swms-rpc-service"/>
+
+    <dubbo:registry address="${dubbo.registry.address}"/>
+
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
+
+
+    <!-- 启动时初始化Spring上下文环境工具类 -->
+    <bean id="springContextUtil" class="com.thinkjoy.common.util.SpringContextUtil"></bean>
+
+    <!--dubbo的服务发布全部使用注解方式,在对应的serviceImpl上加上Dubbo的Service注解即可,调用方需要用Dubbo的Inject注解进行引用-->
+    <!--具体参考https://gitee.com/reger/spring-boot-starter-dubbo-->
+    <!--若发现该库不满足Dubbo的一些功能,可以将发布改为Dubbo原生的方式,即下面配置-->
+    <!--<bean id="demoServiceImpl" class="com.thinkjoy.swms.rpc.service.impl.DemoServiceImpl"/>-->
+    <!--<dubbo:service interface="com.thinkjoy.swms.rpc.api.DemoService" ref="demoServiceImpl"/>-->
+
+</beans>

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkjoy.swms.dao.mapper.SwmsInsuranceSettingMapper">
+  <resultMap id="BaseResultMap" type="com.thinkjoy.swms.dao.entity.SwmsInsuranceSetting">
+    <id column="inssetting_uid" jdbcType="VARCHAR" property="inssettingUid" />
+    <result column="insurance_name" jdbcType="VARCHAR" property="insuranceName" />
+    <result column="insurance_company" jdbcType="VARCHAR" property="insuranceCompany" />
+    <result column="insurance_category" jdbcType="VARCHAR" property="insuranceCategory" />
+    <result column="insurance_limit" jdbcType="DOUBLE" property="insuranceLimit" />
+    <result column="insurance_cost" jdbcType="INTEGER" property="insuranceCost" />
+    <result column="detailed_terms" jdbcType="VARCHAR" property="detailedTerms" />
+    <result column="insurance_liability" jdbcType="VARCHAR" property="insuranceLiability" />
+    <result column="is_open" jdbcType="VARCHAR" property="isOpen" />
+    <result column="is_pay" jdbcType="VARCHAR" property="isPay" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="ctime" jdbcType="BIGINT" property="ctime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="school_code" jdbcType="VARCHAR" property="schoolCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    inssetting_uid, insurance_name, insurance_company, insurance_category, insurance_limit, 
+    insurance_cost, detailed_terms, insurance_liability, is_open, is_pay, creator, ctime, 
+    description, status, school_code
+  </sql>
+  <select id="selectByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsInsuranceSettingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from swms_insurance_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from swms_insurance_setting
+    where inssetting_uid = #{inssettingUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from swms_insurance_setting
+    where inssetting_uid = #{inssettingUid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsInsuranceSettingExample">
+    delete from swms_insurance_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.thinkjoy.swms.dao.entity.SwmsInsuranceSetting">
+    insert into swms_insurance_setting (inssetting_uid, insurance_name, insurance_company, 
+      insurance_category, insurance_limit, insurance_cost, 
+      detailed_terms, insurance_liability, is_open, 
+      is_pay, creator, ctime, 
+      description, status, school_code
+      )
+    values (#{inssettingUid,jdbcType=VARCHAR}, #{insuranceName,jdbcType=VARCHAR}, #{insuranceCompany,jdbcType=VARCHAR}, 
+      #{insuranceCategory,jdbcType=VARCHAR}, #{insuranceLimit,jdbcType=DOUBLE}, #{insuranceCost,jdbcType=INTEGER}, 
+      #{detailedTerms,jdbcType=VARCHAR}, #{insuranceLiability,jdbcType=VARCHAR}, #{isOpen,jdbcType=VARCHAR}, 
+      #{isPay,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{ctime,jdbcType=BIGINT}, 
+      #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{schoolCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.thinkjoy.swms.dao.entity.SwmsInsuranceSetting">
+    insert into swms_insurance_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="inssettingUid != null">
+        inssetting_uid,
+      </if>
+      <if test="insuranceName != null">
+        insurance_name,
+      </if>
+      <if test="insuranceCompany != null">
+        insurance_company,
+      </if>
+      <if test="insuranceCategory != null">
+        insurance_category,
+      </if>
+      <if test="insuranceLimit != null">
+        insurance_limit,
+      </if>
+      <if test="insuranceCost != null">
+        insurance_cost,
+      </if>
+      <if test="detailedTerms != null">
+        detailed_terms,
+      </if>
+      <if test="insuranceLiability != null">
+        insurance_liability,
+      </if>
+      <if test="isOpen != null">
+        is_open,
+      </if>
+      <if test="isPay != null">
+        is_pay,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="schoolCode != null">
+        school_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="inssettingUid != null">
+        #{inssettingUid,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceName != null">
+        #{insuranceName,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceCompany != null">
+        #{insuranceCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceCategory != null">
+        #{insuranceCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceLimit != null">
+        #{insuranceLimit,jdbcType=DOUBLE},
+      </if>
+      <if test="insuranceCost != null">
+        #{insuranceCost,jdbcType=INTEGER},
+      </if>
+      <if test="detailedTerms != null">
+        #{detailedTerms,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceLiability != null">
+        #{insuranceLiability,jdbcType=VARCHAR},
+      </if>
+      <if test="isOpen != null">
+        #{isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null">
+        #{isPay,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCode != null">
+        #{schoolCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.thinkjoy.swms.dao.entity.SwmsInsuranceSettingExample" resultType="java.lang.Long">
+    select count(*) from swms_insurance_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update swms_insurance_setting
+    <set>
+      <if test="record.inssettingUid != null">
+        inssetting_uid = #{record.inssettingUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insuranceName != null">
+        insurance_name = #{record.insuranceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insuranceCompany != null">
+        insurance_company = #{record.insuranceCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insuranceCategory != null">
+        insurance_category = #{record.insuranceCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insuranceLimit != null">
+        insurance_limit = #{record.insuranceLimit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.insuranceCost != null">
+        insurance_cost = #{record.insuranceCost,jdbcType=INTEGER},
+      </if>
+      <if test="record.detailedTerms != null">
+        detailed_terms = #{record.detailedTerms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insuranceLiability != null">
+        insurance_liability = #{record.insuranceLiability,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isOpen != null">
+        is_open = #{record.isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isPay != null">
+        is_pay = #{record.isPay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=BIGINT},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolCode != null">
+        school_code = #{record.schoolCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update swms_insurance_setting
+    set inssetting_uid = #{record.inssettingUid,jdbcType=VARCHAR},
+      insurance_name = #{record.insuranceName,jdbcType=VARCHAR},
+      insurance_company = #{record.insuranceCompany,jdbcType=VARCHAR},
+      insurance_category = #{record.insuranceCategory,jdbcType=VARCHAR},
+      insurance_limit = #{record.insuranceLimit,jdbcType=DOUBLE},
+      insurance_cost = #{record.insuranceCost,jdbcType=INTEGER},
+      detailed_terms = #{record.detailedTerms,jdbcType=VARCHAR},
+      insurance_liability = #{record.insuranceLiability,jdbcType=VARCHAR},
+      is_open = #{record.isOpen,jdbcType=VARCHAR},
+      is_pay = #{record.isPay,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      ctime = #{record.ctime,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      school_code = #{record.schoolCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thinkjoy.swms.dao.entity.SwmsInsuranceSetting">
+    update swms_insurance_setting
+    <set>
+      <if test="insuranceName != null">
+        insurance_name = #{insuranceName,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceCompany != null">
+        insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceCategory != null">
+        insurance_category = #{insuranceCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceLimit != null">
+        insurance_limit = #{insuranceLimit,jdbcType=DOUBLE},
+      </if>
+      <if test="insuranceCost != null">
+        insurance_cost = #{insuranceCost,jdbcType=INTEGER},
+      </if>
+      <if test="detailedTerms != null">
+        detailed_terms = #{detailedTerms,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceLiability != null">
+        insurance_liability = #{insuranceLiability,jdbcType=VARCHAR},
+      </if>
+      <if test="isOpen != null">
+        is_open = #{isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null">
+        is_pay = #{isPay,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolCode != null">
+        school_code = #{schoolCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where inssetting_uid = #{inssettingUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thinkjoy.swms.dao.entity.SwmsInsuranceSetting">
+    update swms_insurance_setting
+    set insurance_name = #{insuranceName,jdbcType=VARCHAR},
+      insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+      insurance_category = #{insuranceCategory,jdbcType=VARCHAR},
+      insurance_limit = #{insuranceLimit,jdbcType=DOUBLE},
+      insurance_cost = #{insuranceCost,jdbcType=INTEGER},
+      detailed_terms = #{detailedTerms,jdbcType=VARCHAR},
+      insurance_liability = #{insuranceLiability,jdbcType=VARCHAR},
+      is_open = #{isOpen,jdbcType=VARCHAR},
+      is_pay = #{isPay,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      school_code = #{schoolCode,jdbcType=VARCHAR}
+    where inssetting_uid = #{inssettingUid,jdbcType=VARCHAR}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

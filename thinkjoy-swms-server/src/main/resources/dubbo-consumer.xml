@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!--项目名称-->
+    <dubbo:application name="thinkjoy-swms-server"/>
+
+    <dubbo:registry address="${dubbo.registry.address}"/>
+
+    <!--dubbo的服务发布全部使用注解方式,在对应的serviceImpl上加上Dubbo的Service注解即可,调用方需要用Dubbo的Inject注解进行引用-->
+    <!--具体参考https://gitee.com/reger/spring-boot-starter-dubbo-->
+    <!--若发现该库不满足Dubbo的一些功能,可以将发布改为Dubbo原生的方式,即下面配置-->
+    <!--<dubbo:reference id="demoService" interface="com.thinkjoy.swms.rpc.api.DemoService"/>-->
+
+    <!-- 接口服务 -->
+    <!--<dubbo:reference id="ucenterApiService" interface="com.thinkjoy.ucenter.rpc.api.UcenterApiService" mock="true"/>-->
+    <!--<dubbo:reference id="amsApproleService" interface="com.thinkjoy.ams.rpc.api.AmsApproleService" mock="true"/>-->
+    <!--<dubbo:reference id="amsApppermissionService" interface="com.thinkjoy.ams.rpc.api.AmsApppermissionService" mock="true"/>-->
+    <!--<dubbo:reference id="amsAppService" interface="com.thinkjoy.ams.rpc.api.AmsAppService" mock="true"/>-->
+    <!--<dubbo:reference id="menusService" interface="com.thinkjoy.swms.rpc.api.MenusService"/>-->
+
+
+</beans>
